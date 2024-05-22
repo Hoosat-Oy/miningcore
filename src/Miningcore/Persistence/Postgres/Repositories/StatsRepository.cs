@@ -87,7 +87,7 @@ public class StatsRepository : IStatsRepository
 
     public async Task<MinerStats> GetMinerStatsAsync(IDbConnection con, IDbTransaction tx, string poolId, string miner, CancellationToken ct)
     {
-        var query = @"SELECT (SELECT SUM(difficulty) FROM shares WHERE poolid = @poolId AND miner = @miner) AS pendingshares,
+        var query = @"SELECT (SELECT SUM(s.difficulty) FROM shares s JOIN blocks b ON s.blockheight = b.blockheight WHERE s.poolid = @poolId AND s.miner = @miner  AND b.status != 'orphaned') AS pendingshares,
             (SELECT amount FROM balances WHERE poolid = @poolId AND address = @miner) AS pendingbalance,
             (SELECT SUM(amount) FROM payments WHERE poolid = @poolId and address = @miner) as totalpaid,
             (SELECT SUM(amount) FROM payments WHERE poolid = @poolId and address = @miner and created >= date_trunc('day', now())) as todaypaid";
