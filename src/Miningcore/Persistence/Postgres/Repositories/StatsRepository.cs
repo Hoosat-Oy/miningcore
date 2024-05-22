@@ -87,10 +87,53 @@ public class StatsRepository : IStatsRepository
 
     public async Task<MinerStats> GetMinerStatsAsync(IDbConnection con, IDbTransaction tx, string poolId, string miner, CancellationToken ct)
     {
-        var query = @"SELECT (SELECT SUM(s.difficulty) FROM shares s JOIN blocks b ON s.blockheight = b.blockheight WHERE s.poolid = @poolId AND s.miner = @miner  AND b.status != 'orphaned') AS pendingshares,
-            (SELECT amount FROM balances WHERE poolid = @poolId AND address = @miner) AS pendingbalance,
-            (SELECT SUM(amount) FROM payments WHERE poolid = @poolId and address = @miner) as totalpaid,
-            (SELECT SUM(amount) FROM payments WHERE poolid = @poolId and address = @miner and created >= date_trunc('day', now())) as todaypaid";
+        // Difficulties without checking for block orphan status
+        // SELECT SUM(difficulty) 
+        //     FROM shares 
+        //     WHERE poolid = 'HTN-PPLNS-1F1B'
+        //     AND miner = 'hoosat:qzxctflhu82wp86uv8f8vxxd5lw8ll8rxstkth6zs3eyyk3su29vc538nzh9x';
+        // Difficulties checked that they don't have block status orphaned with subquery.
+        // SELECT SUM(difficulty) 
+        //     FROM (
+        //         SELECT s.difficulty AS difficulty, b.status AS status
+        //         FROM shares s
+        //         LEFT JOIN blocks b ON s.blockheight = b.blockheight
+        //         WHERE s.poolid = 'HTN-PPLNS-1F1B'
+        //         AND s.miner = 'hoosat:qzxctflhu82wp86uv8f8vxxd5lw8ll8rxstkth6zs3eyyk3su29vc538nzh9x'
+        //     ) AS sub
+        //     WHERE status IS NULL or status != 'orphaned';
+        // These two queries match if there is no orphaned blocks in database.
+
+        var query = @"SELECT 
+                        (SELECT SUM(difficulty) 
+                            FROM (
+                                SELECT s.difficulty AS difficulty, b.status AS status
+                                FROM shares s
+                                LEFT JOIN blocks b ON s.blockheight = b.blockheight
+                                WHERE s.poolid = @poolId
+                                AND s.miner = @miner
+                            ) AS sub
+                            WHERE status IS NULL or status !=  'orphaned'
+                        ) AS pendingshares,
+                        (SELECT amount 
+                            FROM balances 
+                            WHERE poolid = @poolId
+                            AND address = @miner
+                        ) AS pendingbalance,
+                        (SELECT SUM(amount) 
+                            FROM payments 
+                            WHERE poolid = @poolId
+                            AND address = @miner
+                        ) AS totalpaid,
+                        (SELECT SUM(amount) 
+                            FROM payments 
+                            WHERE poolid = @poolId
+                            AND address = @miner
+                            AND created >= date_trunc('day', now())
+                        ) AS todaypaid;";
+
+
+
 
         var result = await con.QuerySingleOrDefaultAsync<MinerStats>(new CommandDefinition(query, new { poolId, miner }, tx, cancellationToken: ct));
 
