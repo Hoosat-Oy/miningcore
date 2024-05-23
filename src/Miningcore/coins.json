@@ -4939,6 +4939,20 @@
         "explorerTxLink": "https://explorer.hoosat.fi/txs/{0}",
         "explorerAccountLink": "https://explorer.hoosat.fi/addresses/{0}"
     },
+    "k0bradag": {
+        "name": "K0bradag",
+        "canonicalName": "K0bradag",
+        "symbol": "KODA",
+        "family": "kaspa",
+        "website": "https://k0bradag.com/",
+        "market": "",
+        "twitter": "https://x.com/k0bradag",
+        "telegram": "https://t.me/k0bradag",
+        "discord": "https://discord.com/invite/ahnm5zENqg",
+        "explorerBlockLink": "",
+        "explorerTxLink": "",
+        "explorerAccountLink": ""
+    },
     "kaspa": {
         "name": "Kaspa",
         "canonicalName": "Kaspa",

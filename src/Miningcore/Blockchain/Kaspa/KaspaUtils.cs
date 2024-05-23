@@ -374,6 +374,7 @@ public class KaspaAddressUtility
                 };
 
                 break;
+            case "KODA":
             case "HTN":
                 this.stringsToBech32Prefixes = new Dictionary<string, KaspaBech32Prefix>
                 {
