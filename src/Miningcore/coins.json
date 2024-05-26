@@ -4939,10 +4939,10 @@
         "explorerTxLink": "https://explorer.hoosat.fi/txs/{0}",
         "explorerAccountLink": "https://explorer.hoosat.fi/addresses/{0}"
     },
-    "k0bradag": {
-        "name": "K0bradag",
-        "canonicalName": "K0bradag",
-        "symbol": "KODA",
+    "Kobradag": {
+        "name": "Kobradag",
+        "canonicalName": "Kobradag",
+        "symbol": "KODAD",
         "family": "kaspa",
         "website": "https://k0bradag.com/",
         "market": "",

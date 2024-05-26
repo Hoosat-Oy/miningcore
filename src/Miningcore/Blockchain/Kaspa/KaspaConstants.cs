@@ -25,7 +25,7 @@ public static class HoosatConstants
 }
 
 
-public static class K0bradagConstants
+public static class KobradagConstants
 {
     // List of Kobra prefixes: 
     public const string ChainPrefixDevnet = "kobradev";

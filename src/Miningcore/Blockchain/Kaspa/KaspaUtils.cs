@@ -374,13 +374,13 @@ public class KaspaAddressUtility
                 };
 
                 break;
-            case "KODA":
+            case "KODAD":
                 this.stringsToBech32Prefixes = new Dictionary<string, KaspaBech32Prefix>
                 {
-                    { K0bradagConstants.ChainPrefixMainnet, KaspaBech32Prefix.KaspaMain },
-                    { K0bradagConstants.ChainPrefixDevnet, KaspaBech32Prefix.KaspaDev },
-                    { K0bradagConstants.ChainPrefixTestnet, KaspaBech32Prefix.KaspaTest },
-                    { K0bradagConstants.ChainPrefixSimnet, KaspaBech32Prefix.KaspaSim },
+                    { KobradagConstants.ChainPrefixMainnet, KaspaBech32Prefix.KaspaMain },
+                    { KobradagConstants.ChainPrefixDevnet, KaspaBech32Prefix.KaspaDev },
+                    { KobradagConstants.ChainPrefixTestnet, KaspaBech32Prefix.KaspaTest },
+                    { KobradagConstants.ChainPrefixSimnet, KaspaBech32Prefix.KaspaSim },
                 };
                 break;
             case "HTN":
