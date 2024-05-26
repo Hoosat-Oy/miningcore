@@ -382,6 +382,7 @@ public class KaspaAddressUtility
                     { KobradagConstants.ChainPrefixTestnet, KaspaBech32Prefix.KaspaTest },
                     { KobradagConstants.ChainPrefixSimnet, KaspaBech32Prefix.KaspaSim },
                 };
+
                 break;
             case "HTN":
                 this.stringsToBech32Prefixes = new Dictionary<string, KaspaBech32Prefix>

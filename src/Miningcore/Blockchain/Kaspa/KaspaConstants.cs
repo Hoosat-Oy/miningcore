@@ -27,7 +27,7 @@ public static class HoosatConstants
 
 public static class KobradagConstants
 {
-    // List of Kobra prefixes: 
+    // List of Kobra prefixes: https://github.com/kobradag/kobrad/blob/master/util/address.go
     public const string ChainPrefixDevnet = "kobradev";
     public const string ChainPrefixSimnet = "kobrasim";
     public const string ChainPrefixTestnet = "kobratest";
