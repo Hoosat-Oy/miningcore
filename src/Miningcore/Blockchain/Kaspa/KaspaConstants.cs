@@ -25,6 +25,15 @@ public static class HoosatConstants
 }
 
 
+public static class BitmemeConstants
+{
+    // List of HTN prefixes: https://github.com/bitmeme-taxi/bitmemed/blob/main/util/address.go
+    public const string ChainPrefixDevnet = "btmdev";
+    public const string ChainPrefixSimnet = "btmsim";
+    public const string ChainPrefixTestnet = "btmtest";
+    public const string ChainPrefixMainnet = "btm";
+}
+
 public static class KobradagConstants
 {
     // List of Kobra prefixes: https://github.com/kobradag/kobrad/blob/master/util/address.go

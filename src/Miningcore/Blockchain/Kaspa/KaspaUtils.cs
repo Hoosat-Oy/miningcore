@@ -464,6 +464,17 @@ public class KaspaAddressUtility
                 };
 
                 break;
+
+            case "BTM":
+                this.stringsToBech32Prefixes = new Dictionary<string, KaspaBech32Prefix>
+                {
+                    { BitmemeConstants.ChainPrefixMainnet, KaspaBech32Prefix.KaspaMain },
+                    { BitmemeConstants.ChainPrefixDevnet, KaspaBech32Prefix.KaspaDev },
+                    { BitmemeConstants.ChainPrefixTestnet, KaspaBech32Prefix.KaspaTest },
+                    { BitmemeConstants.ChainPrefixSimnet, KaspaBech32Prefix.KaspaSim },
+                };
+
+                break;
             default:
                 this.stringsToBech32Prefixes = new Dictionary<string, KaspaBech32Prefix>
                 {
