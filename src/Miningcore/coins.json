@@ -4648,9 +4648,9 @@
         "twitter": "https://twitter.com/bitmemebtm",
         "telegram": "https://t.me/bitmemebtm",
         "discord": "https://discord.gg/bitmemebtm",
-        "explorerBlockLink": "",
-        "explorerTxLink": "",
-        "explorerAccountLink": ""
+        "explorerBlockLink": "https://explorer.bitmeme.world/blocks/$hash$",
+        "explorerTxLink": "https://explorer.bitmeme.world/txs/{0}",
+        "explorerAccountLink": "https://explorer.bitmeme.world/addresses/{0}"
     },
     "kaspa": {
         "name": "Kaspa",
