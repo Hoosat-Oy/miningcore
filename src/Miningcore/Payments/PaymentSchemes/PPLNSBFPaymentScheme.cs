@@ -61,12 +61,14 @@ public class PPLNSBFPaymentScheme : IPayoutScheme
 {
     var poolConfig = pool.Config;
     var payoutConfig = poolConfig.PaymentProcessing.PayoutSchemeConfig;
+    decimal blockFinderRewardPercentage = (decimal)payoutConfig?.ToObject<Config>()?.blockFinderReward ?? 0.1m;
+    logger.Info(() => $"Block Finder Reward percentage {blockFinderRewardPercentage}");
 
     // PPLNS window (see https://bitcointalk.org/index.php?topic=39832)
     var window = payoutConfig?.ToObject<Config>()?.Factor ?? 2.0m;
 
-    // Calculate the block finder reward (10% of the block reward)
-    var blockFinderReward = blockReward * 0.1m;
+    // Calculate the block finder reward (payoutConfig.blockFinderReward % of the block reward)
+    var blockFinderReward = blockReward * blockFinderRewardPercentage;
 
     // Calculate the total reward for miners (excluding block finder reward)
     var totalRewardForMiners = blockReward - blockFinderReward;
@@ -171,6 +173,9 @@ if (totalRewards > 0)
         Dictionary<string, double> shares, Dictionary<string, decimal> rewards, CancellationToken ct)
     {
         var poolConfig = pool.Config;
+        var payoutConfig = poolConfig.PaymentProcessing.PayoutSchemeConfig;
+        decimal blockFinderRewardPercentage = (decimal)payoutConfig?.ToObject<Config>()?.blockFinderReward ?? 0.1m;
+        logger.Info(() => $"Block Finder Reward percentage {blockFinderRewardPercentage}");
         var done = false;
         var before = block.Created;
         var inclusive = true;
@@ -180,8 +185,8 @@ if (totalRewards > 0)
         var blockRewardRemaining = blockReward;
         DateTime? shareCutOffDate = null;
 
-        // Calculate the block finder reward (10% of the block reward)
-        var blockFinderReward = blockReward * 0.1m;
+        // Calculate the block finder reward (blockFinderRewardPercentage % of the block reward)
+        var blockFinderReward = blockReward * blockFinderRewardPercentage;
 
         while (!done && !ct.IsCancellationRequested)
         {

@@ -394,16 +394,6 @@ public class KaspaAddressUtility
                 };
 
                 break;
-            case "KODA":
-                this.stringsToBech32Prefixes = new Dictionary<string, KaspaBech32Prefix>
-                {
-                    { KobradagConstants.ChainPrefixMainnet, KaspaBech32Prefix.KaspaMain },
-                    { KobradagConstants.ChainPrefixDevnet, KaspaBech32Prefix.KaspaDev },
-                    { KobradagConstants.ChainPrefixTestnet, KaspaBech32Prefix.KaspaTest },
-                    { KobradagConstants.ChainPrefixSimnet, KaspaBech32Prefix.KaspaSim },
-                };
-
-                break;
             case "KLS":
                 this.stringsToBech32Prefixes = new Dictionary<string, KaspaBech32Prefix>
                 {
