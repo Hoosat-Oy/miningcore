@@ -62,7 +62,8 @@ public class PPLNSBFPaymentScheme : IPayoutScheme
     {
         var poolConfig = pool.Config;
         var payoutConfig = poolConfig.PaymentProcessing.PayoutSchemeConfig;
-        decimal blockFinderRewardPercentage = (decimal)payoutConfig?.ToObject<Config>()?.blockFinderReward ?? 0.1m;
+        var schemeConfig = payoutConfig?.ToObject<Config>();
+        decimal blockFinderRewardPercentage = schemeConfig?.blockFinderReward ?? 0.1m;
         logger.Info(() => $"Block Finder Reward percentage {blockFinderRewardPercentage}");
 
         // PPLNS window (see https://bitcointalk.org/index.php?topic=39832)
@@ -175,7 +176,8 @@ public class PPLNSBFPaymentScheme : IPayoutScheme
     {
         var poolConfig = pool.Config;
         var payoutConfig = poolConfig.PaymentProcessing.PayoutSchemeConfig;
-        decimal blockFinderRewardPercentage = (decimal)payoutConfig?.ToObject<Config>()?.blockFinderReward ?? 0.1m;
+        var schemeConfig = payoutConfig?.ToObject<Config>();
+        decimal blockFinderRewardPercentage = schemeConfig?.blockFinderReward ?? 0.1m;
         logger.Info(() => $"Block Finder Reward percentage {blockFinderRewardPercentage}");
         var done = false;
         var before = block.Created;
