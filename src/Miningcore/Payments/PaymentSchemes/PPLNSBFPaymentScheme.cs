@@ -112,13 +112,10 @@ public class PPLNSBFPaymentScheme : IPayoutScheme
 
         // Diagnostics
         var totalShareCount = shares.Values.ToList().Sum(x => new decimal(x));
-        var totalRewards = rewards.Values.ToList().Sum(x => x); // Total rewards distributed to miners
-
-        // Add the block finder reward to the total rewards
-        totalRewards += blockFinderReward;
+        var totalRewards = rewards.Values.ToList().Sum(x => x) + blockFinderReward; // Total rewards distributed to miners
 
         if (totalRewards > 0)
-            logger.Info(() => $"{FormatUtil.FormatQuantity((double)totalShareCount)} ({Math.Round(totalShareCount, 2)}) shares contributed to a total payout of {payoutHandler.FormatAmount(totalRewards)} ({totalRewards / totalRewardForMiners * 100:0.00}% of block reward) to {rewards.Keys.Count + 1} addresses");
+            logger.Info(() => $"{FormatUtil.FormatQuantity((double)totalShareCount)} ({Math.Round(totalShareCount, 2)}) shares contributed to a total payout of {payoutHandler.FormatAmount(totalRewards)} ({totalRewards / blockReward * 100:0.00}% of block reward) to {rewards.Keys.Count + 1} addresses");
 
     }
 
